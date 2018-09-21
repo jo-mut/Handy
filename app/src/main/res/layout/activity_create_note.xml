@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CreateNoteActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_gravity="top"
+        android:layout_height="56dp"
+        app:contentInsetStart="15dp"
+        app:contentInsetLeft="15dp"
+        android:background="@color/colorPrimary"
+        app:popupTheme="@style/AppTheme.AppBarOverlay"
+        app:titleTextColor="@android:color/white"/>
+
+
+    <LinearLayout
+        android:padding="15dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/titleEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Title"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:textSize="16sp"
+            android:inputType="textPersonName"
+            android:text="" />
+
+        <TextView
+            android:textStyle="italic"
+            android:textSize="12sp"
+            android:id="@+id/titleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="(Give your note a title)" />
+
+        <EditText
+            android:id="@+id/noteEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Write your notes here"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp"
+            android:inputType="textPersonName"
+            android:textSize="14sp"
+            android:text="" />
+
+        <TextView
+            android:textStyle="italic"
+            android:textSize="12sp"
+            android:id="@+id/noteTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="(Write your notes here)" />
+
+    </LinearLayout>
+
+</LinearLayout>

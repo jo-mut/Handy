@@ -23,7 +23,7 @@ public interface HandyDao {
     LiveData<List<Handy>> getHandies();
 
     @Query("select * from Handy where id = :id")
-    Handy getHandyById(String id);
+    LiveData<Handy> getHandyById(String id);
 
 
     @Insert(onConflict = REPLACE)

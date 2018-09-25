@@ -44,7 +44,7 @@ public class HandiesAdapter extends RecyclerView.Adapter<HandiesViewHolder> {
 
         holder.handyTitleTextView.setText(title);
         holder.handyNoteTextView.setText(note);
-        holder.timeTextView.setText(DateFormat.format("dd/MM/yy", date));
+        holder.timeTextView.setText(DateFormat.format("dd MMM, yy", date));
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

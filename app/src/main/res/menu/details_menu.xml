@@ -9,12 +9,6 @@
     </item>
 
     <item
-        android:id="@+id/action_edit_note"
-        app:showAsAction="never"
-        android:title="Edit note">
-    </item>
-
-    <item
         android:id="@+id/action_share"
         app:showAsAction="never"
         android:title="Share">

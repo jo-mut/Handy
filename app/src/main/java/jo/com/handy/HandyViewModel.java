@@ -11,7 +11,7 @@ import java.util.List;
 public class HandyViewModel extends AndroidViewModel {
     private HandyRepository handyRepository;
     private LiveData<List<Handy>> handies;
-    private Handy handy;
+    private  LiveData<Handy> handy;
     private String id;
 
 
@@ -26,9 +26,13 @@ public class HandyViewModel extends AndroidViewModel {
         return handies;
     }
 
-    Handy getHandyById(String id){
-        handy = handyRepository.getHandyById(id);
+    LiveData<Handy> getItemById(String id){
+        handy = handyRepository.getItemById(id);
         return handy;
+    }
+
+    public void update(Handy handy){
+        handyRepository.updateItem(handy);
     }
 
     public void insert(Handy handy){

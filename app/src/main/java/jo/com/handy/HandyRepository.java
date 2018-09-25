@@ -10,9 +10,8 @@ import java.util.List;
 public class HandyRepository {
     private HandyDao handyDao;
     private LiveData<List<Handy>> handies;
-    public Handy handy;
+    LiveData<Handy> handy;
     private  HandyDatabase handyDatabase;
-    private String id;
 
     HandyRepository(Application application){
         handyDatabase = HandyDatabase.getHandyDatabaseInstance(application);
@@ -24,11 +23,10 @@ public class HandyRepository {
         return handies;
     }
 
-    Handy getHandyById(String id){
+    LiveData<Handy> getItemById(String id){
         handy = handyDao.getHandyById(id);
         return handy;
     }
-
 
     public void createNewHandy(Handy handy) {
         new insertAsyncTask(handyDao).execute(handy);
@@ -49,9 +47,30 @@ public class HandyRepository {
         }
     }
 
-    public void deleteItem(Handy handy){
-        new deleteAsyncTask(handyDatabase)
+    public void updateItem(Handy handy){
+        new updateAsyncTask(handyDatabase)
                 .execute(handy);
+    }
+
+    public static class updateAsyncTask extends AsyncTask<Handy, Void, Void> {
+        private HandyDatabase database;
+        updateAsyncTask(HandyDatabase handyDatabase){
+            database = handyDatabase;
+        }
+
+        @Override
+        protected Void doInBackground(final Handy... handies) {
+            database.handyDao().updateHandy(handies[0]);
+            return null;
+        }
+
+    }
+
+    public void deleteItem(Handy handy){
+        if (handy != null){
+            new deleteAsyncTask(handyDatabase)
+                    .execute(handy);
+        }
     }
 
     public static class deleteAsyncTask extends AsyncTask<Handy, Void, Void> {
@@ -67,7 +86,5 @@ public class HandyRepository {
         }
 
     }
-
-
 
 }

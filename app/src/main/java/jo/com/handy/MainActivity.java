@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -96,8 +97,6 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
             startActivityForResult(intent, NEW_REQUEST_CODE);
         }
 
-
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -125,17 +124,19 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
                     note  = data.getStringExtra(NOTE);
                     Handy handy = new Handy();
                     int id = new Random().nextInt();
+                    if (TextUtils.isEmpty(title)){
+                        handy.setNote(note);
+                    }
+
+                    if (TextUtils.isEmpty(note)){
+                        handy.setTitle(title);
+                    }
                     handy.setId(id);
-                    handy.setNote(note);
-                    handy.setTitle(title);
                     handy.setDate(System.currentTimeMillis());
                     viewModel.insert(handy);
                 }else {
                     Toast.makeText(this, "Try saving again", Toast.LENGTH_SHORT).show();
                 }
-
-            }else {
-                Toast.makeText(this, "Try saving saving again", Toast.LENGTH_SHORT).show();
             }
         }
 

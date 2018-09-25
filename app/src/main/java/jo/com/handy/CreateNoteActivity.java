@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import java.util.Random;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -21,6 +23,7 @@ public class CreateNoteActivity extends AppCompatActivity {
 
     private static final String TITLE = "title";
     private static final String NOTE = "note";
+    private HandyViewModel handyViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,20 +69,18 @@ public class CreateNoteActivity extends AppCompatActivity {
     private void saveHandyNote(){
         final String title = titleEditText.getText().toString().trim();
         final String note = noteEditText.getText().toString().trim();
-        Intent resultIntent = new Intent(this, MainActivity.class);
-        if (!TextUtils.isEmpty(note) && !TextUtils.isEmpty(title)){
-            resultIntent.putExtra(CreateNoteActivity.TITLE, title);
-            resultIntent.putExtra(CreateNoteActivity.NOTE, note);
-            setResult(RESULT_OK, resultIntent);
-        }else if (!TextUtils.isEmpty(note) && TextUtils.isEmpty(title)){
-            resultIntent.putExtra(CreateNoteActivity.NOTE, note);
-            setResult(RESULT_OK, resultIntent);
-        }else if (!TextUtils.isEmpty(title) && TextUtils.isEmpty(note)){
-            resultIntent.putExtra(CreateNoteActivity.TITLE, title);
-            setResult(RESULT_OK, resultIntent);
-        }else {
-            setResult(RESULT_CANCELED, resultIntent);
+        Handy handy = new Handy();
+        int id = new Random().nextInt();
+        if (TextUtils.isEmpty(title)){
+            handy.setNote(note);
         }
+
+        if (TextUtils.isEmpty(note)){
+            handy.setTitle(title);
+        }
+        handy.setId(id);
+        handy.setDate(System.currentTimeMillis());
+        handyViewModel.insert(handy);
 
         finish();
         titleEditText.setText("");
